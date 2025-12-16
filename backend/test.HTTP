@@ -1,0 +1,19 @@
+### 회원가입 테스트
+POST http://localhost:8080/api/users/register
+Content-Type: application/json
+
+{
+  "loginId": "guest1",
+  "password": "12345",
+  "nickname": "corqu"
+}
+
+### 로그인
+POST http://localhost:8080/login
+Content-Type: application/x-www-form-urlencoded
+
+username=guest1&password=12345
+
+### 퀴즈 받기 테스트
+GET http://localhost:8080/api/quizzes?size=5
+Content-Type: application/json

@@ -1,0 +1,13 @@
+version: "3.8"
+
+services:
+  db:
+    image: mysql:8.0
+    container_name: my-project-db
+    environment:
+      MYSQL_ROOT_PASSWORD: 1234
+      MYSQL_DATABASE: beforefinaldb
+      MYSQL_USER: devuser
+      MYSQL_PASSWORD: devpass
+    ports:
+      - "3306:3306"
