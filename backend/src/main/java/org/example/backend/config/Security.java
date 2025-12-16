@@ -8,6 +8,7 @@ import org.springframework.security.web.SecurityFilterChain;
 import org.springframework.stereotype.Component;
 import org.springframework.web.cors.CorsConfiguration;
 
+import java.util.Arrays;
 import java.util.Collections;
 
 @Component
@@ -17,15 +18,16 @@ public class Security {
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(auth->auth
-                        .requestMatchers("/login", "/api/users/*", "/").permitAll()
+                        .requestMatchers("/login", "/api/users/*", "/", "/api/quizzes/**").permitAll()
                         .requestMatchers("/info").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated());
 
         http
                 .cors(cors->cors.configurationSource(request ->{
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(Collections.singletonList("http://localhost:5173"));
+                    config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173"));
                     config.setAllowedMethods(Collections.singletonList("*"));
+                    config.setAllowedHeaders(Collections.singletonList("*"));
                     config.setAllowCredentials(true);
                     return config;
                 }));
