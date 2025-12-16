@@ -18,7 +18,7 @@ public class User {
     private String password;
     private String nickname;
 
-    private String Role = "ROLE_GUEST";
+    private String Role = "ROLE_USER";
 
     private Long score = 0l;
 
