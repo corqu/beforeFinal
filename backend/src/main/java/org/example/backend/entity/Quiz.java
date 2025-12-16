@@ -16,6 +16,7 @@ public class Quiz {
 
     private String title;
     private String description;
+
     private String answer;
 
     public Quiz(Long id, String title, String description, String answer) {

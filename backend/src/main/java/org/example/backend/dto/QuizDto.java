@@ -1,5 +1,6 @@
 package org.example.backend.dto;
 
+import jakarta.validation.constraints.NotBlank;
 import lombok.Getter;
 import lombok.Setter;
 import org.example.backend.entity.Quiz;
@@ -8,7 +9,9 @@ import org.example.backend.entity.Quiz;
 public class QuizDto {
     private Long id;
     private String title;
+    @NotBlank(message = "문제를 입력하세요")
     private String description;
+    @NotBlank(message = "정답을 입력하세요")
     private String answer;
 
     public QuizDto(Long id, String title, String description, String answer) {
