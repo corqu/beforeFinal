@@ -16,6 +16,9 @@ public class QuizService {
 
     public List<QuizDto> getQuizzes(int number) {
         List<Quiz> quizzes = quizRepository.findRandomQuizzes(number);
+        if (quizzes.size() < number) {
+            throw new  RuntimeException("not enough quizzes");
+        }
         return quizzes.stream().map(QuizDto::quiz4Dto).collect(Collectors.toList());
     }
 
