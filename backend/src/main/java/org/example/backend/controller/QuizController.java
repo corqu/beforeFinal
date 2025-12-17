@@ -27,9 +27,9 @@ public class QuizController {
         return ResponseEntity.ok(addQuiz);
     }
 
-    @DeleteMapping
+    @DeleteMapping("/{id}")
     @ResponseStatus(HttpStatus.NO_CONTENT)
-    public void deleteQuiz(@RequestBody QuizDto quizDto) {
-        quizService.deleteQuiz(quizDto.getId());
+    public void deleteQuiz(@PathVariable Long id) {
+        quizService.deleteQuiz(id);
     }
 }
