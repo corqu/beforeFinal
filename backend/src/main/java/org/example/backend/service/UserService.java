@@ -1,6 +1,7 @@
 package org.example.backend.service;
 
 import lombok.RequiredArgsConstructor;
+import org.example.backend.dto.userdto.UserAfterRegisterDto;
 import org.example.backend.dto.userdto.UserInfoDto;
 import org.example.backend.dto.userdto.UserRegisterDto;
 import org.example.backend.entity.User;
@@ -22,10 +23,10 @@ public class UserService {
     }
 
     // 회원가입
-    public UserRegisterDto registerUser(UserRegisterDto userDto) {
+    public UserAfterRegisterDto registerUser(UserRegisterDto userDto) {
         String encodedPassword = passwordEncoder.encode(userDto.getPassword());
         User user = new User(userDto.getLoginId(), encodedPassword, userDto.getNickname());
         User saved = userRepository.save(user);
-        return new UserRegisterDto(saved.getLoginId(), saved.getPassword(), saved.getNickname());
+        return new UserAfterRegisterDto(saved.getId(), saved.getLoginId(), saved.getNickname());
     }
 }

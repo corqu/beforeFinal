@@ -4,6 +4,7 @@ import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;
 import lombok.RequiredArgsConstructor;
 import org.example.backend.config.CustomUserDetails;
+import org.example.backend.dto.userdto.UserAfterRegisterDto;
 import org.example.backend.dto.userdto.UserInfoDto;
 import org.example.backend.dto.userdto.UserRegisterDto;
 import org.example.backend.service.UserService;
@@ -18,7 +19,7 @@ import org.springframework.web.bind.annotation.*;
 public class UserController {
     private final UserService userService;
 
-    @GetMapping("/info/{id}")
+    @GetMapping("/info")
     public ResponseEntity<UserInfoDto> info(@AuthenticationPrincipal CustomUserDetails customUserDetails) {
         if (customUserDetails == null) {
             return ResponseEntity.status(HttpStatus.UNAUTHORIZED).build();
@@ -30,8 +31,8 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserRegisterDto> register(@RequestBody UserRegisterDto userDto, HttpServletRequest request){
-        UserRegisterDto dto = userService.registerUser(userDto);
+    public ResponseEntity<UserAfterRegisterDto> register(@RequestBody UserRegisterDto userDto, HttpServletRequest request){
+        UserAfterRegisterDto dto = userService.registerUser(userDto);
         return ResponseEntity.ok(dto);
     }
 
