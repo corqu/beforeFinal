@@ -16,20 +16,20 @@ services:
       - ./db_data:/var/lib/mysql
 
   quizapp:
-    image: quiz-app:1.1
+    image: corqu/quizapp:1.7
     container_name: quizapp
     ports:
       - "8080:8080"
     environment:
-      DB_URL: ${SPRING_DB_URL}
-      DB_USERNAME: ${MYSQL_USER}
-      DB_PASSWORD: ${MYSQL_PASSWORD}
+      SPRING_DATASOURCE_URL: ${SPRING_DB_URL}
+      SPRING_DATASOURCE_USERNAME: ${MYSQL_USER}
+      SPRING_DATASOURCE_PASSWORD: ${MYSQL_PASSWORD}
     depends_on:
       - db
     restart: on-failure
 
   quizfront:
-    image: quiz-front:1.0
+    image: corqu/quiz-front:1.4
     container_name: quizfront
     ports:
       - "3000:3000"
