@@ -4,6 +4,7 @@
 .env
 .env.*
 !.env.example  # 예시 파일은 올려도 됨
+!.env.production
 
 # IDE 설정 파일 (팀원끼리 설정 다를 수 있으므로 제외 추천)
 .idea/
@@ -90,3 +91,12 @@ jenkins_data/
 
 # 주의: Jenkinsfile은 설정을 담은 코드이므로 깃허브에 '반드시' 올려야 합니다!
 # (여기 적지 마세요!)
+
+# 서버 pem 파일
+*.pem
+*.key
+*.crt
+*.cer
+*.p12
+*.jks
+*.keystore
