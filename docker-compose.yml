@@ -16,7 +16,7 @@ services:
       - ./db_data:/var/lib/mysql
 
   quizapp:
-    image: corqu/quizapp:1.7
+    image: corqu/quizapp:1.8
     container_name: quizapp
     ports:
       - "8080:8080"
@@ -29,7 +29,7 @@ services:
     restart: on-failure
 
   quizfront:
-    image: corqu/quiz-front:1.4
+    image: corqu/quiz-front:1.6
     container_name: quizfront
     ports:
       - "3000:3000"

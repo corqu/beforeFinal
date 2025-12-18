@@ -99,13 +99,10 @@ export function AuthProvider({ children }) {
     if (!user) return null;
 
     try {
-      const response = await fetch(
-        `${baseURL}/api/users/info/${user.id || 0}`,
-        {
-          method: "GET",
-          credentials: "include",
-        }
-      );
+      const response = await fetch(`${baseURL}/api/users/info`, {
+        method: "GET",
+        credentials: "include",
+      });
 
       if (response.ok) {
         return await response.json();
