@@ -30,7 +30,6 @@ jobs:
 
       - name: Build with Gradle
         run: ./gradlew clean build -x test
-
       - name: Login Docker
         uses: docker/login-action@v2
         with:
@@ -50,7 +49,7 @@ jobs:
       - name: Build and push Docker image
         uses: docker/build-push-action@v4
         with:
-          context: .
+          context: ./backend
           push: true
           tags: ${{ steps.meta.outputs.tags }}
           labels: ${{steps.meta.outputs.labels}}
