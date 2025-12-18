@@ -1,5 +1,6 @@
 package org.example.backend.config;
 
+import jakarta.servlet.http.HttpServletResponse;
 import org.springframework.context.annotation.Bean;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -23,12 +24,15 @@ public class Security {
                         .anyRequest().authenticated());
 
         http
-                .cors(cors->cors.configurationSource(request ->{
+                .cors(cors->cors
+                        .configurationSource(request ->{
                     CorsConfiguration config = new CorsConfiguration();
-                    config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173"));
+//                    config.setAllowedOrigins(Arrays.asList("http://localhost:3000", "http://localhost:5173"));
+                            config.setAllowedOriginPatterns(Collections.singletonList("*"));
                     config.setAllowedMethods(Collections.singletonList("*"));
                     config.setAllowedHeaders(Collections.singletonList("*"));
                     config.setAllowCredentials(true);
+
                     return config;
                 }));
         http
@@ -37,7 +41,16 @@ public class Security {
                 .formLogin(login -> login
                         .usernameParameter("username")
                         .passwordParameter("password")
-                        .defaultSuccessUrl("/api/quizzes")
+//                        .defaultSuccessUrl("/api/quizzes")
+                        .successHandler((request, response, authentication) -> {
+                            response.setStatus(HttpServletResponse.SC_OK);
+                            response.setContentType("application/json");
+                            response.getWriter().write("{\"message\": \"Login success\"}");
+                        })
+                        .failureHandler((request, response, exception) -> {
+                            response.setStatus(HttpServletResponse.SC_UNAUTHORIZED);
+                            response.getWriter().write("{\"message\": \"Login success\"}");
+                        })
                         .permitAll());
         return http.build();
     }
