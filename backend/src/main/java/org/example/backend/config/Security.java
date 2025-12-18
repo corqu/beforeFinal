@@ -23,6 +23,8 @@ public class Security {
                         .requestMatchers("/info").hasAnyRole("USER", "ADMIN")
                         .anyRequest().authenticated());
 
+        http.csrf((csrf -> csrf.disable()));
+
         http
                 .cors(cors->cors
                         .configurationSource(request ->{
